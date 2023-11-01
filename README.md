@@ -2,9 +2,9 @@
 
 ## 1. setup environment
 
-1. conda create -n trans python=3.10
-2. conda activate trans
-3. pip install -r requirements.txt
+1. conda create -n murag python=3.10
+2. conda activate murag
+3. python -m pip install -r requirements.txt
 
 ## 2. Models
 
@@ -40,6 +40,9 @@ You can change `top_k` to modify the number of retrieved captions, default 5.
 ## 3. Explanations of these models
 
 ### 3.1 blip2&t5 model
+```
+python infer_vqa.py
+```
 
 This model is used to complete visual question answering (VQA) tasks. 
 Input:  
@@ -54,6 +57,9 @@ Output:
 The model uses blip2 to get the embedding of the image, uses T5 to extract the embedding of the question, then concats the two embeddings, and inputs it into the subsequent module to generate the answer.
 
 ### 3.2 rag model
+```
+python infer_rag.py
+```
 
 This model is used to complete question answering (QA) tasks simply. 
 Input:  
@@ -67,6 +73,9 @@ Output:
 The model contains a retriever and a generator. The former consists of a question encoder and a document index, which are responsible for question encoding and document indexing respectively; the latter is a seq2seq generative model. In the retrieval stage, the maximum inner product search method (MIPS) is used to retrieve top-K related documents. For more info, please refer to [RAG](https://proceedings.neurips.cc/paper/2020/file/6b493230205f780e1bc26945df7481e5-Paper.pdf)
 
 ### 3.3 rag_simple model
+```
+python infer_rag_simple.py
+```
 
 This model is used to complete visual question answering (VQA) tasks simply. 
 Input:  
@@ -85,6 +94,9 @@ This model only contains the retrieval stage. First, this model uses vit to cach
 4. use this caption as the input image's caption
 
 ### 3.4 rag_improved01 model
+````
+python infer_rag_improve01.py
+````
 
 This model is used to complete visual question answering (VQA) tasks simply. 
 Input:  
@@ -102,3 +114,13 @@ This model only contains the retrieval stage. First, this model uses vit to cach
 2. calculate the inner product with all the image emeddings in the database
 3. obtain the captions of the image with the top-k inner product, 
 4. put these caption together as the input image's caption
+
+
+### 3.5 rag_improved01_video model
+```
+python infer_rag_improve01_video.py
+python infer_summarization.py
+```
+First, run `python infer_rag_improve01_video.py` to get the frame-level captions, the results will be saved as *_murag.mp4 and *_murag.txt.
+Second, run `python infer_summarization.py` to get the video-level captions.
+

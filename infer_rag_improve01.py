@@ -12,7 +12,7 @@ def cache_dataset_embeds(search_img_root, processor, model):
     if os.path.exists(cache_save_path):
         caches = torch.load(cache_save_path)
     else:
-        with open("/home/ubuntu/codes/MuRAG/sample20230919/annotations/sample048_train.json", encoding="utf-8") as f:
+        with open("./sample20230919/annotations/sample048_train.json", encoding="utf-8") as f:
             datas = json.load(f)
             
         # import pdb
@@ -94,10 +94,10 @@ summarizer = pipeline(task="summarization", model="t5-base", tokenizer="t5-base"
 
 
 
-search_img_root = "/home/ubuntu/codes/MuRAG/sample20230919/images/train"
+search_img_root = "./sample20230919/images/train"
 caches = cache_dataset_embeds(search_img_root, processor, model)
 
-query_img_root = "/home/ubuntu/codes/MuRAG/sample20230919/images/test"
+query_img_root = "./sample20230919/images/test"
 query_img_paths = glob("%s/*" % (query_img_root))
 query_img_paths = sorted(query_img_paths)
 
